@@ -229,6 +229,6 @@ It's essential to be mindful when working with formula fields in Salesforce, esp
 - If you run into an unexpected result, try breaking out your formula into its individual fields and performing the calculation manually.
 
 ​
-I hope this blog post was helpful in understanding how to work around issues with formula fields in the before context. With the right approach, you'll be able to achieve accurate results in not time! I’ve included only the necessary code snippets here to illustrate the problem. If you’d like to look at the full code including the trigger handler, here’s a link to the gist. If you're looking for more information on Salesforce best practices and development, be sure to check out our other blog posts.
+I hope this blog post was helpful in understanding how to work around issues with formula fields in the before context. With the right approach, you'll be able to achieve accurate results in not time! I’ve included only the necessary code snippets here to illustrate the problem. If you’d like to look at the full code including the trigger handler, here’s a link to the [gist](https://gist.github.com/tamarachance/e44db2f1ffcc04e1a47a10507d0f1f9b.js). If you're looking for more information on Salesforce best practices and development, be sure to check out our other [blog posts](sfdxdeveloper.com).
 
 Ready to grow your business? For custom Salesforce solutions tailored to your business needs, contact our team of experts today!
