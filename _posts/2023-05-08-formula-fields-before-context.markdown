@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Working with Formula Fields in the Before Context of an Apex Trigger - Don't Make This Mistake!"
+title:  "Working with Formula Fields in Apex Before Triggers"
 date:   2023-05-08 10:30:00 -0400
 categories: salesforce apex
 comments: true
