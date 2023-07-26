@@ -19,30 +19,26 @@ Let's say that a retail business has a custom field on the Opportunity object ca
 As good developers, they needed to support a couple formula fields that the company's admins put together. So their calculation used both standard input fields and formula fields. They abstracted these calculations into a utility class, called `CalculateValues` which is called from the Opportunity trigger and looks something like the following:
 
 ```apex
-/*
- * This class's purpose is to automate Opportunity values based on proposal data.
+/**
+ * This class's purpose is to automate Opportunity values based on proposal data. The
+ * Opportunity and Proposal are passed into two separate functions which (1) maps the
+ * data from the Proposal onto the Opportunity and (2) calculates the Total Value.
  */
 
 public class CalculateValues {
-    
-    public static void setProposalData(OpportunityTriggerHandler.OpportunityContext ctx) {
-        setDataFromProposal(ctx); //Fields are mapped here, then
-        setTotalValueMetric(ctx); //Total Value is calculated.
+  
+    public static void setProposalData(Opportunity opp, Proposal__c proposal) {
+        setDataFromProposal(opp, proposal);
+        opp.Total_Value__c = calculateTotalValue(opp);
     }
 
-    private static void setDataFromProposal(OpportunityTriggerHandler.OpportunityContext ctx) {
-
-        ctx.opp.Unit_Price__c = ctx.proposal.Unit_Price__c;
-        ctx.opp.Quantity__c = ctx.proposal.Quantity__c;
-        ctx.opp.Comped_Quantity__c = ctx.proposal.Comped__c;
-        ctx.opp.Company_Transportation_Cost__c = ctx.proposal.Company_Transportation_Cost__c;
-        ctx.opp.Uncategorized_Transportation_Costs__c = ctx.proposal.Uncategorized_Transportation_Cost__c;
-        ctx.opp.Waste_Cost_Margin__c = ctx.proposal.Waste_Cost_Margin__c;
-        
-    }
-
-    public static void setTotalValueMetric(OpportunityTriggerHandler.OpportunityContext ctx) {
-        ctx.opp.Total_Value__c = calculateTotalValue(ctx.opp);
+    private static void setDataFromProposal(Opportunity opp, Proposal__c proposal) {
+        opp.Unit_Price__c = proposal.Unit_Price__c;
+        opp.Quantity__c = proposal.Quantity__c;
+        opp.Comped_Quantity__c = proposal.Comped__c;
+        opp.Company_Transportation_Cost__c = proposal.Company_Transportation_Cost__c;
+        opp.Uncategorized_Transportation_Costs__c = proposal.Uncategorized_Transportation_Cost__c;
+        opp.Waste_Cost_Margin__c = proposal.Waste_Cost_Margin__c;        
     }
 
     private static Decimal calculateTotalValue(Opportunity opp) {
@@ -53,7 +49,7 @@ public class CalculateValues {
         if (opp.Total_Transportation_Costs__c != null) {
             totalValue -= opp.Total_Transportation_Costs__c;
         }
-        if(opp.Waste_Cost_Margin__c != null) { 
+        if (opp.Waste_Cost_Margin__c != null) { 
             totalValue -= (totalValue * opp.Waste_Cost_Margin__c);
         }
         return totalValue;
@@ -139,28 +135,26 @@ While it’s great to know that the formula does work, it doesn’t help us to m
 The good news is there are some strategies you can use to get around this limitation of the formula fields. Here’s an example of a manual calculation strategy to do just that:
 
 ```apex
-/*
- * This class's purpose is to automate Opportunity values based on proposal data.
+/**
+ * This class's purpose is to automate Opportunity values based on proposal data. The
+ * Opportunity and Proposal are passed into two separate functions which (1) maps the
+ * data from the Proposal onto the Opportunity and (2) calculates the Total Value.
  */
 
 public class CalculateValues {
-    
-    public static void setProposalData(OpportunityTriggerHandler.OpportunityContext ctx) {
-        setDataFromProposal(ctx);
-        setTotalValueMetric(ctx);
+  
+    public static void setProposalData(Opportunity opp, Proposal__c proposal) {
+        setDataFromProposal(opp, proposal);
+        opp.Total_Value__c = calculateTotalValue(opp);
     }
 
-    private static void setDataFromProposal(OpportunityTriggerHandler.OpportunityContext ctx) {
-        ctx.opp.Unit_Price__c = ctx.proposal.Unit_Price__c;
-        ctx.opp.Quantity__c = ctx.proposal.Quantity__c;
-        ctx.opp.Comped_Quantity__c = ctx.proposal.Comped__c;
-        ctx.opp.Company_Transportation_Cost__c = ctx.proposal.Company_Transportation_Cost__c;
-        ctx.opp.Uncategorized_Transportation_Costs__c = ctx.proposal.Uncategorized_Transportation_Cost__c;
-        ctx.opp.Waste_Cost_Margin__c = ctx.proposal.Waste_Cost_Margin__c;        
-    }
-
-    public static void setTotalValueMetric(OpportunityTriggerHandler.OpportunityContext ctx) {
-        ctx.opp.Total_Value__c = calculateTotalValue(ctx.opp);
+    private static void setDataFromProposal(Opportunity opp, Proposal__c proposal) {
+        opp.Unit_Price__c = proposal.Unit_Price__c;
+        opp.Quantity__c = proposal.Quantity__c;
+        opp.Comped_Quantity__c = proposal.Comped__c;
+        opp.Company_Transportation_Cost__c = proposal.Company_Transportation_Cost__c;
+        opp.Uncategorized_Transportation_Costs__c = proposal.Uncategorized_Transportation_Cost__c;
+        opp.Waste_Cost_Margin__c = proposal.Waste_Cost_Margin__c;        
     }
 
     private static Decimal calculateTotalValue(Opportunity opp) {
@@ -171,27 +165,27 @@ public class CalculateValues {
         if (opp.Total_Transportation_Costs__c != null) {
             totalValue -= calcTotalTransportationCost(opp);
         }
-        if(opp.Waste_Cost_Margin__c != null) { 
+        if (opp.Waste_Cost_Margin__c != null) { 
             totalValue -= totalValue * opp.Waste_Cost_Margin__c;
         }
         return totalValue;
     }
 
-    private static Decimal calcTotalOrder (Opportunity opp){
+    private static Decimal calcTotalOrder(Opportunity opp) {
         Decimal totalOrder = 0.0;
-        if(opp.Comped_Quantity__c != null){
+        if (opp.Comped_Quantity__c != null) {
             totalOrder += (opp.Quantity__c - opp.Comped_Quantity__c) * opp.Unit_Price__c;
-        }else{
+        } else {
             totalOrder += opp.Quantity__c * opp.Unit_Price__c;
         }
         return totalOrder;
     }
 
-    private static Decimal calcTotalTransportationCost (Opportunity opp){
+    private static Decimal calcTotalTransportationCost(Opportunity opp) {
         Decimal totalTransportationCost = 0.0;
-        if(opp.Uncategorized_Transportation_Costs__c != null){
+        if (opp.Uncategorized_Transportation_Costs__c != null) {
             totalTransportationCost += opp.Company_Transportation_Cost__c - opp.Uncategorized_Transportation_Costs__c;
-        }else{
+        } else {
             totalTransportationCost += opp.Company_Transportation_Cost__c;
         }
         return totalTransportationCost;
