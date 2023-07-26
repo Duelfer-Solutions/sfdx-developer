@@ -6,7 +6,7 @@ categories: salesforce apex
 comments: true
 ---
 
-Formula fields in Salesforce can be used to quickly calculate values from other fields on an object and to create custom values based on specific conditions, thus making Salesforce more powerful and flexible. However, if you're not careful when working with them in the before-context of an Apex trigger, you may experience unexpected results due to the runtime of formula fields.
+Salesforce formula fields are a powerful and flexible tool to calculate values from related fields without needing the overhead of Flows or Apex code. However, when referencing them from before triggers, what makes them so efficient (calculating at runtime when accessed) may cause unexpected results if not handled carefully.
 
 In this blog post, we'll walk you through a case study that highlights how to get around the issue of formula fields in Apex triggers not evaluating correctly when values aren’t yet committed to the database.
 
@@ -14,11 +14,9 @@ Let's get started!
 
 ## Case Study Scenario:
 
-Let's say that a retail business needs to populate a `Total_Value__c` field on each Opportunity based on a calculation that adds together the values from three other fields also on the Opportunity object. This calculation happens in the before context of an update trigger on the Opportunity object.
+Let's say that a retail business has a custom field on the Opportunity object called `Total_Value__c` that's quite complex and requires Apex code to calculate. Their developers have written this calculation in the Opportunity before trigger, pulling together a number of fields from the Opportunity object and a related object, `Proposal__c`.
 
-Prior to the calculation, the fields on the Opportunity object are overwritten by a custom object that tracks proposals, called Proposal__c. Whenever a proposal is saved, it triggers the update for the Opportunity. 
-
-This trigger calls another class that contains the logic to overwrite the three field values on the Opportunity based on data from a related proposal. Here’s an example of what the class in our ficitional scenario might look like:
+As good developers, they needed to support a couple formula fields that the company's admins put together. So their calculation used both standard input fields and formula fields. They abstracted these calculations into a utility class, called `CalculateValues` which is called from the Opportunity trigger and looks something like the following:
 
 ```apex
 /*
@@ -63,16 +61,11 @@ public class CalculateValues {
 }
 ```
 
-Whenever a Proposal__c record is saved, the Opportunity trigger runs and maps the values from the Proposal__c to the Opportunity object in the setDataFromProposal method.
-
-Then, the context is passed to the setTotalValueMetric method. The calculateTotalValue method returns the value that will be set to the Total_Value__c field on the opportunity. 
-
-The first two fields in the calculateTotalValue calculation, Total_Order__c and Total_Transportation_Cost__c, are both formula fields. 
-
+But here's the kicker: `Total_Order__c` and `Total_Transportation_Cost__c` are both formula fields. Here's a screenshot of the formula next to where they are referenced in the code:
 
 ![Depicts the formulas for the Total Order and Total Transportation Cost fields in the calculateTotalValue method.](/assets/img/posts/formula-fields-before-context/calcTotalValue.png)
 
-Here’s an example test class for this calculation that asserts what you might expect the results for the Total_Value__c fields to be based on the above code:
+Here’s an example test class for this calculation that asserts what you might expect the results for the `Total_Value__c` fields to be based on the above code:
 
 ```apex
 @isTest
@@ -131,17 +124,13 @@ But when the test class runs….
 
 ![A screenshot of the test class failing. Assertion expected 68745.00770, but the actual value was 0.00.](/assets/img/posts/formula-fields-before-context/failed-assertion.png)
 
-…the assertion fails. So what’s the problem?
+…the assertion fails. But, why?
 
-The newly mapped opportunity fields are required as inputs to the formula fields being used in the calculateTotalValue calculation. 
+The formula fields for `Total_Order__c` and `Total_Transportation_Cost__c` ran when the trigger was first called. Uploading the proposal, however, affects the resulting value of these fields. 
 
-The formula fields for Total_Order__c and Total_Transportation_Cost__c ran when the trigger was first called. Before the mapping occurred and was committed to the database. 
+Formula fields rely on data that has already been committed to the database, and because the changes made by the uploaded proposal are *not yet committed to the database*, the data that Salesforce loads for `Total_Order__c` and `Total_Transportation_Cost__c` is stale.
 
-Since formulas rely on data that’s already been committed to the database, the formula fields can’t see the new values from the proposal object until after save.
-
-The Total Value Calculation evaluated correctly, but with incorrect data so that our assumptions were incorrect.
-
-After update, if you were to run the calculation again with no additional changes made to the underlying fields, the formula fields would reflect correct values and the Total Value calculation would be as expected. 
+After update, if you were to run the calculation again with no additional changes made to the underlying fields, the formula fields would reflect correct values and the Total Value Calculation would be as expected. This is because the after trigger occurs after database commit and reloads any formula field values.
 
 While it’s great to know that the formula does work, it doesn’t help us to make sure that our calculation is evaluating as expected in the before-context.
 
@@ -210,7 +199,7 @@ public class CalculateValues {
 }
 ```
 
-While the formula fields rely on data that has already been committed to the database, the new values mapped by the setDataFromProposal method are available to use in the calculateTotalValue calculation.
+While the formula fields rely on data that has already been committed to the database, the new values mapped by the `setDataFromProposal` method are available to use in the `calculateTotalValue` calculation.
 
 Instead of using the formula fields, the manual calculation breaks out the fields inside of the formula field and performs the calculation from each formula inside of two helper functions. 
 
@@ -218,17 +207,20 @@ Now if we take that same test class from earlier and run it with our manually ca
 
 ![A screenshot of the debug log showing the correct Total Value of 68745.00770](/assets/img/posts/formula-fields-before-context/correctTotalValue.png)
 
-…the test now passes and the Total_Value__c field shows an accurate value.
+…the test now passes and the `Total_Value__c` field shows an accurate value.
+
+## Limitations
+
+The main limitation to this solution is that it forces you to replicate the formula field in Apex. You would have to be aware of any changes to this field and synchronize them with changes to the underlying code. 
+
+This adds overhead, but it might be a necessary trade-off if the feature provides enough added value.
 
 ## Closing Thoughts
 
-It's essential to be mindful when working with formula fields in Salesforce, especially within triggers. Here are some tips and best practices to keep in mind when you're working in the before context and using formula fields:
+It's essential to be mindful when working with formula fields in Salesforce, especially within triggers. Here are some tips and best practices to keep in mind when you're working with before triggers and formula fields:
 
 - Formula fields rely on data that is already committed to the database.
-- Make sure to perform testing to ensure your calculations are accurate and don't rely on any incorrect data.
+- Make sure to perform testing to ensure your calculations are accurate and don't rely on incorrect or stale data.
 - If you run into an unexpected result, try breaking out your formula into its individual fields and performing the calculation manually.
 
-​
-I hope this blog post was helpful in understanding how to work around issues with formula fields in the before context. With the right approach, you'll be able to achieve accurate results in not time! I’ve included only the necessary code snippets here to illustrate the problem. If you’d like to look at the full code including the trigger handler, here’s a link to the [gist](https://gist.github.com/tamarachance/e44db2f1ffcc04e1a47a10507d0f1f9b.js). If you're looking for more information on Salesforce best practices and development, be sure to check out our other [blog posts](sfdxdeveloper.com).
-
-Ready to grow your business? For custom Salesforce solutions tailored to your business needs, contact our team of experts today!
+I hope this blog post was helpful in understanding how to work around issues with formula fields and before triggers. With the right approach, you'll be able to achieve accurate results in no time! I’ve included only the necessary code snippets here to illustrate the problem. If you’d like to look at the full code including the trigger handler, here’s a link to the [gist](https://gist.github.com/tamarachance/e44db2f1ffcc04e1a47a10507d0f1f9b.js). If you're looking for more information on Salesforce best practices and development, be sure to check out our other [blog posts](sfdxdeveloper.com).
