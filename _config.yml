@@ -14,16 +14,16 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: SFDX Developer
-email: jdduelfer@gmail.com
+email: salesforce@duelfersolutions.com
 description: >- # this means to ignore newlines until "baseurl:"
   Tutorials, documentation, and advice for working with Salesforce,
   mainly within the new SFDX framework.
 tagline: "A blog dedicated to Salesforce development."
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://sfdxdeveloper.com" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://sfdxdeveloper.com" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  jduelfer
 
-author: "Jon Duelfer"
+author: "Duelfer Solutions, LLC"
 logo: /assets/img/logo-with-background.jpeg
 
 # Build settings
