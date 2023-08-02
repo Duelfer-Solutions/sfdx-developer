@@ -2,6 +2,7 @@
 layout: post
 title:  "Detail Button to Lighting Web Component"
 date:   2020-06-17 12:00:00 -0400
+author: Jon Duelfer
 categories: salesforce lwc
 comments: true
 ---

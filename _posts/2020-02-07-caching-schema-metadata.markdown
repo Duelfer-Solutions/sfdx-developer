@@ -2,6 +2,7 @@
 layout: post
 title:  "Caching Schema Metadata"
 date:   2020-02-07 10:30:00 -0400
+author: Jon Duelfer
 categories: salesforce apex
 comments: true
 ---

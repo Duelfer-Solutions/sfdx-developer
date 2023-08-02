@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "Working with Formula Fields in Apex Before Triggers"
-date:   2023-05-08 10:30:00 -0400
+date:   2023-08-02 05:00:00 -0400
 categories: salesforce apex
+author: Tamara Chance
 comments: true
 ---
 
@@ -217,4 +218,4 @@ It's essential to be mindful when working with formula fields in Salesforce, esp
 - Make sure to perform testing to ensure your calculations are accurate and don't rely on incorrect or stale data.
 - If you run into an unexpected result, try breaking out your formula into its individual fields and performing the calculation manually.
 
-I hope this blog post was helpful in understanding how to work around issues with formula fields and before triggers. With the right approach, you'll be able to achieve accurate results in no time! I’ve included only the necessary code snippets here to illustrate the problem. If you’d like to look at the full code including the trigger handler, here’s a link to the [gist](https://gist.github.com/tamarachance/e44db2f1ffcc04e1a47a10507d0f1f9b.js). If you're looking for more information on Salesforce best practices and development, be sure to check out our other [blog posts](sfdxdeveloper.com).
+I hope this blog post was helpful in understanding how to work around issues with formula fields and before triggers. With the right approach, you'll be able to achieve accurate results in no time! I’ve included only the necessary code snippets here to illustrate the problem. If you’d like to    look at the full code including the trigger handler, here’s a link to the [gist](https://gist.github.com/tamarachance/e44db2f1ffcc04e1a47a10507d0f1f9b.js). If you're looking for more information on Salesforce best practices and development, be sure to check out our other [blog posts](/).

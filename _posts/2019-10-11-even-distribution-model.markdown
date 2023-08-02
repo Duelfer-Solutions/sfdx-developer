@@ -2,6 +2,7 @@
 layout: post
 title:  "Campaign Influence: Even Distribution Model"
 date:   2019-12-09 15:00:00 -0400
+author: Jon Duelfer
 categories: marketing campaigns
 comments: true
 ---
