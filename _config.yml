@@ -22,6 +22,7 @@ tagline: "A blog dedicated to Salesforce development."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://sfdxdeveloper.com" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  jduelfer
+show_excerpts: true
 
 author: "Duelfer Solutions, LLC"
 logo: /assets/img/logo-with-background.jpeg
