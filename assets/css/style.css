@@ -360,6 +360,13 @@ table {
   padding-bottom: 30px;
 }
 
+.post-blog-roll {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  float: left;
+}
+
 .post-title,
 .post-content h1 {
   font-size: 42px;

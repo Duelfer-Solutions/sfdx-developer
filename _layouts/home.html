@@ -14,6 +14,12 @@ layout: default
     <ul class="post-list">
       {%- for post in site.posts -%}
       <li>
+        {% if post.image %}
+          <img src="{{ post.image | relative_url }}" alt="featured image" class="post-blog-roll">
+        {% else %}
+          {% assign postImage = "/assets/img/image-default.png" %}
+          <img src="{{ postImage | relative_url }}" alt="featured image" class="post-blog-roll">
+        {% endif %}
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         <span class="post-meta">{{ post.date | date: date_format }}</span>
         <h3>
