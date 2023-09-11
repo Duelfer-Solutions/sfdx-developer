@@ -5,7 +5,7 @@ date:   2020-02-07 10:30:00 -0400
 author: Jon Duelfer
 categories: salesforce apex
 comments: true
-image: assets/img/posts/caching-schema-metadata/featured-image.png
+image: assets/img/stockImages/cache-gold-letters.png
 ---
 
 If you use the `Global Metadata Schema` that is provided by Apex to access field labels, record types names, etc., I would wager that you are *not* using it efficiently. But as a seasoned Salesforce developer, you may prove me wrong.
@@ -62,7 +62,7 @@ for (Integer i = 0; i < 1000; i++) {
 
 I opened the log produced from this execution and still within the Developer Console, went to `Debug > Switch Perspective > Analysis (Predefined)`. Within the `Execution Overview` section, the tabe `Timeline` shows the CPU use.
 
-![UnoptimizedSchema](/assets/img/unoptimized-schema.png)
+![UnoptimizedSchema](/assets/img/posts/caching-schema-metadata/unoptimized-schema.png)
 
 It used **12,553.27 milliseconds**, or **12.5** seconds of CPU time! This is crazy since it's such a simple piece of code. I could not believe it, so I ran the optimized version.
 
@@ -75,7 +75,7 @@ for (Integer i = 0; i < 1000; i++) {
 
 Looking at the same log analysis for the optimized code:
 
-![OptimizedSchema](/assets/img/optimized-schema.png)
+![OptimizedSchema](/assets/img/posts/caching-schema-metadata/optimized-schema.png)
 
 The optimized version used **264.97 milliseconds** of CPU time. What a difference! You can imagine – on a really rough estimate – that accessing the record type name from the `Schema` class costs ~10 milliseconds.
 

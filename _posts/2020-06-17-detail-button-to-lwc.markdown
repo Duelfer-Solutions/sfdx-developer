@@ -5,16 +5,16 @@ date:   2020-06-17 12:00:00 -0400
 author: Jon Duelfer
 categories: salesforce lwc
 comments: true
-image: assets/img/posts/detail-button-lwc/featured-image.png
+image: assets/img/stockImages/laptop-with-anonymous-code.png
 ---
 
 This tutorial shows you how to open a Lightning Web Component from a detail page button on a record's home page. You can download the code from [my Githup repo](https://github.com/jduelfer/detail-button-to-lwc) and deploy it directly to a fresh scratch org (instructions included): [https://github.com/jduelfer/detail-button-to-lwc](https://github.com/jduelfer/detail-button-to-lwc).
 
 I will demonstrate how to pass the record's context (i.e. the record ID) as a URL parameter to collect within the LWC JavaScript controller. Here is what you will have at the end of the tutorial:
-![detail button](/assets/img/detail-button.png)
+![detail button](/assets/img/posts/detail-button-lwc/detail-button.png)
 
 The button navigates to the LWC with the URL parameter accessible:
-![lwc component](/assets/img/lwc-component.png)
+![lwc component](/assets/img/posts/detail-button-lwc/lwc-component.png)
 
 ## The Aura Component
 Unfortnuately, LWCs are not yet accessible via a URL. They might be soon, but in the meantime (there is no release roadmap that I know about) we have a workaround: wrap the LWC within an Aura component.
