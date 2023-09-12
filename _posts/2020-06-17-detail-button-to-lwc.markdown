@@ -6,6 +6,7 @@ author: Jon Duelfer
 categories: salesforce lwc
 comments: true
 image: assets/img/stockImages/laptop-with-anonymous-code.png
+thumbnail: assets/img/stockImages/laptop-with-anonymous-code-thumbnail.png
 ---
 
 This tutorial shows you how to open a Lightning Web Component from a detail page button on a record's home page. You can download the code from [my Githup repo](https://github.com/jduelfer/detail-button-to-lwc) and deploy it directly to a fresh scratch org (instructions included): [https://github.com/jduelfer/detail-button-to-lwc](https://github.com/jduelfer/detail-button-to-lwc).
