@@ -14,11 +14,11 @@ layout: default
       {%- for post in site.posts -%}
         <div class="post-card">
           <div class="card-image">
-            {% if post.image %}
-              <img src="{{ post.image | relative_url }}" alt="featured image" class="card-featured-image">
+            {% if post.thumbnail %}
+              <img src="{{ post.thumbnail | relative_url }}" alt="featured image" class="card-featured-image">
             {% else %}
-              {% assign postImage = "/assets/img/image-default.png" %}
-              <img src="{{ postImage | relative_url }}" alt="featured image" class="card-featured-image">
+              {% assign postThumbnail = "/assets/img/image-default-thumbnail.png" %}
+              <img src="{{ postThumbnail | relative_url }}" alt="featured image" class="card-featured-image">
             {% endif %}
           </div>
           <div class="card-content">
