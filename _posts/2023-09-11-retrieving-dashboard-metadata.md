@@ -6,7 +6,6 @@ categories: salesforce metadata
 author: Tamara Chance
 comments: true
 image: assets/img/stockImages/metadata-doodles.png
-thumbnail: assets/img/stockImages/metadata-doodles-thumbnail.png
 ---
 Dashboards in Salesforce allow you to visualize your data and gain insights into your organization's performance. Even more valuable is the ability to deploy dashboards from one org to another. 
 
