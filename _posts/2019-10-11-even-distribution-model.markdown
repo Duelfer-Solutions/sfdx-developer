@@ -6,7 +6,6 @@ author: Jon Duelfer
 categories: marketing campaigns
 comments: true
 image: assets/img/stockImages/chalkboard-with-campaigns-title.png
-thumbnail: assets/img/stockImages/chalkboard-with-campaigns-title-thumbnail.png
 ---
 
 Salesforce comes out-of-the-box with powerful features to track campaigns and the influence they exert on opportunities. By simply enabling a set of features and adding a couple related lists to the Campaign layout, marketing teams can dive into the data that will help them understand and analyze the effectiveness of their campaigns.
