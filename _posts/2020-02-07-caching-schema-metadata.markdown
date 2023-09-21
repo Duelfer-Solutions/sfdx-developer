@@ -5,7 +5,7 @@ date:   2020-02-07 10:30:00 -0400
 author: Jon Duelfer
 categories: salesforce apex
 comments: true
-image: assets/img/stockImages/cache-gold-letters.png
+image: assets\img\stockImages\cache.png
 ---
 
 If you use the `Global Metadata Schema` that is provided by Apex to access field labels, record types names, etc., I would wager that you are *not* using it efficiently. But as a seasoned Salesforce developer, you may prove me wrong.
