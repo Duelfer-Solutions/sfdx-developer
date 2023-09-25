@@ -273,6 +273,13 @@
   }
 }
 
+.post-featured-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  padding-bottom: $spacing-unit;
+}
+
 
 .social-media-list {
   display: table;
