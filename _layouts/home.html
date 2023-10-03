@@ -10,39 +10,7 @@ layout: default
   {{ content }}
 
   {%- if site.posts.size > 0 -%}
-    <ul class="post-list feed">
-      {%- for post in site.posts -%}
-        <div class="post-card">
-          <div class="card-image">
-            {% if post.image %}
-              <img src="{{ post.image | relative_url }}" alt="featured image" class="card-featured-image">
-            {% else %}
-              {% assign postImage = "/assets/img/image-default.png" %}
-              <img src="{{ postImage | relative_url }}" alt="featured image" class="card-featured-image">
-            {% endif %}
-          </div>
-          <div class="card-content">
-            <div class="title">
-              <h3 class="title">
-                <a class="post-link" href="{{ post.url | relative_url }}">
-                  {{ post.title | escape }}
-                </a>
-              </h3>
-            </div>
-            <div class="card-excerpt">
-              {%- if site.show_excerpts -%}
-                <span class="excerpt">{{ post.excerpt | strip_html |escape }}</span>
-              {%- endif -%}
-            </div>
-            <div class="card-date">
-              {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-              <span class="post-meta date">{{ post.date | date: date_format }}</span>
-            </div>
-          </div>
-        </div>
-      {%- endfor -%}
-    </ul>
-
+    {%- include feed.html -%}
     <p class="feed-subscribe">
       <a href="{{ 'feed.xml' | relative_url }}">
         <svg class="svg-icon orange"><use xlink:href="{{ 'assets/minima-social-icons.svg#rss' | relative_url }}"></use></svg><span>Subscribe</span>

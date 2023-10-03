@@ -1,0 +1,44 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: $spacing-unit;
+    margin: 20 auto;
+}
+
+article.featured {
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-unit;
+    align-items: center;
+    border-bottom: 1px solid $grey-color-light;
+    padding-bottom: $spacing-unit;
+}
+
+article.card > div {
+    margin-top: 10px;
+}
+
+article.card > img, article.featured > img {
+    max-width: 100%;
+    border-radius: 6px;
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.1);
+}
+
+/* responsive home feed*/
+
+@media screen and (max-width: $on-medium) {
+    article.card {
+        grid-column: span 3;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $spacing-unit;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: $on-small) {
+    article.card, article.featured {
+        display: block;
+    }
+}

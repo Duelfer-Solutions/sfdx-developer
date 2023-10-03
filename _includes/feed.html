@@ -1,0 +1,38 @@
+<div class="grid-container">
+  {%- for post in site.posts offset: 0 limit: 1 -%}
+  <article class="featured">
+      {% if post.image %}
+        <img src="{{ post.image | relative_url }}">
+      {% else %}
+        {% assign postImage = "/assets/img/image-default.png" %}
+        <img src="{{ postImage | relative_url }}">
+      {% endif %}
+      <div>
+          <h2><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
+          {%- if site.show_excerpts -%}
+              <p><span>{{ post.excerpt | strip_html |escape }}</span></p>
+          {%- endif -%}
+          {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+          <p><span class="post-meta date">{{ post.date | date: date_format }}</span></p>
+      </div>
+  </article>
+  {%- endfor -%}
+  {%- for post in site.posts offset: 1 limit: null -%}
+  <article class="card">
+      {% if post.image %}
+        <img src="{{ post.image | relative_url }}">
+      {% else %}
+        {% assign postImage = "/assets/img/image-default.png" %}
+        <img src="{{ postImage | relative_url }}">
+      {% endif %}
+      <div>
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+          {%- if site.show_excerpts -%}
+              <p><span>{{ post.excerpt | strip_html |escape }}</span></p>
+          {%- endif -%}
+          {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+          <p><span class="post-meta date">{{ post.date | date: date_format }}</span></p>
+      </div>
+  </article>
+  {%- endfor -%}
+</div>
