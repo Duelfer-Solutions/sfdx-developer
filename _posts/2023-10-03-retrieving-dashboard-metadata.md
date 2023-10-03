@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Retrieving Dashboard Metadata"
-date:   2023-09-11 05:00:00 -0400
+date:   2023-10-03 07:00:00 -0400
 categories: salesforce metadata
 author: Tamara Chance
 comments: true
