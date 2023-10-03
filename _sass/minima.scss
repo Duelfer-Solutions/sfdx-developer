@@ -8,12 +8,12 @@ $base-font-weight: 400 !default;
 $small-font-size:  $base-font-size * 0.875 !default;
 $base-line-height: 1.5 !default;
 
-$spacing-unit:     30px !default;
+$spacing-unit:     40px !default;
 
 $text-color-brand: #ffffff !default;
 $text-color:       #080707 !default;
 $background-color: #ffffff !default;
-$brand-color:      #16325c !default;
+$brand-color:      #212529 !important;
 $color-text-link:  #006dcc !default;
 $color-text-link-visited: #00396b !default;
 
@@ -23,14 +23,16 @@ $grey-color-dark:  darken($grey-color, 25%) !default;
 $orange-color:     #f66a0a !default;
 $table-text-align: left !default;
 
-$color-border: #dddbda !default;
+$color-border: #ffffff !default;
 
 // Width of the content area
-$content-width:    800px !default;
+$content-width:    900px !default;
 
+$on-palm-small:    400px !default;
 $on-palm:          600px !default;
-$on-laptop:        800px !default;
+$on-laptop:        900px !default;
 
+$on-small:         $on-palm-small !default;
 $on-medium:        $on-palm !default;
 $on-large:         $on-laptop !default;
 
@@ -57,5 +59,6 @@ $on-large:         $on-laptop !default;
 @import
   "minima/base",
   "minima/layout",
-  "minima/syntax-highlighting"
+  "minima/syntax-highlighting",
+  "minima/feed"
 ;
