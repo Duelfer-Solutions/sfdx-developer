@@ -26,6 +26,7 @@ author: "Duelfer Solutions, LLC"
 logo: /assets/img/logo-with-background.jpeg
 show_excerpts: true
 excerpt_separator: .
+show_drafts: false
 
 # Build settings
 markdown: kramdown
