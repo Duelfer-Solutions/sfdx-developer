@@ -6,7 +6,7 @@ tag: dynamic-forms
 categories: salesforce low-code
 author: Tamara Chance
 comments: true
-image: assets\img\stockImages\shortcut-workaround-bypass.png
+image: assets/img/stockImages/shortcut-workaround-bypass.png
 ---
 Despite the buzz surrounding the long-awaited support for Dynamic Forms on standard objects which Salesforce made available in September 2023, it falls short in addressing specific use cases. Not at all surprising when you read the long list of [known issues](https://help.salesforce.com/s/articleView?id=sf.dynamic_forms_known_issues.htm&type=5). 
 
