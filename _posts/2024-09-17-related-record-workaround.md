@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "How to Use Related Records as a Workaround for Dynamic Forms"
+date: 2024-09-17 07:00:00 -0400
 tag: dynamic-forms
 categories: salesforce low-code
 author: Tamara Chance
