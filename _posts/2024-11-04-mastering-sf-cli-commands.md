@@ -17,7 +17,7 @@ To get started with sf (v2), you'll first need to uninstall sfdx (v7) if it's cu
 
 Once sfdx is uninstalled, you can proceed with installing sf (v2) by running the `npm install -g @salesforce/cli` command. Here's a link to the full instructions for [moving from sf (v2)](https://developer.salesforce.com/docs/atlas.en-us.252.0.sfdx_setup.meta/sfdx_setup/sfdx_setup_move_to_sf_v2.htm) using NPM, Windows, or Linux. The installation process is pretty straightforward with NPM if you have Node.js already downloaded onto your computer. If you encounter any issues related to dependencies, follow the prompts in the CLI to audit and fix any issues.
 ## Top 10 Most Frequently Used Commands and Their Use Cases
-Once you've successfully installed sf (v2), it's time to start using the new commands. Here, I've compiled a list of my top 10 most frequently used commands, along with the corresponding flags. These commands cover a range of essential tasks from org management to deployments, making them invaluable tools for any Salesforce developer.
+Once you've successfully installed sf (v2), it's time to start using the new commands. Here, I've compiled a list of _my_ top 10 most frequently used commands, along with the corresponding flags. These commands cover a range of essential tasks from org management to deployments, making them invaluable tools for any Salesforce developer.
 ### 1. sf org open
 Opens your default org. Use the `-o` or `--target-org` flags to open an org other than the default or under a specific profile. This replaces the previous `-u` flag.
 ### 2. sf org list
