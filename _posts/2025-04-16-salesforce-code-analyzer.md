@@ -5,7 +5,7 @@ date:   2025-04-16 07:00:00 -0400
 categories: salesforce cli sfdx sf deploy
 author: Tamara Chance
 comments: true
-image:
+image: assets/img/stockImages/salesforce-github.svg
 ---
 Salesforce Code Analyzer is a static analysis tool that scans your Apex, Lightning Web Components (LWC), and Visualforce code to detect potential issues, enforce coding standards, and improve code quality. By using it with your development workflow, you can catch problems early and ensure consistent code quality across your team.
 
