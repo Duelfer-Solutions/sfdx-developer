@@ -1,15 +1,15 @@
 ---
 layout: post
 title:  "Salesforce Code Analyzer: From Local Checks to GitHub Automation"
-date:   2025-04-16 07:00:00 -0400
-categories: salesforce cli sfdx sf deploy
+date:   2025-05-01 07:00:00 -0400
+categories: salesforce cli sf code analyzer github actions
 author: Tamara Chance
 comments: true
 image: assets/img/stockImages/salesforce-github.svg
 ---
 Salesforce Code Analyzer is a static analysis tool that scans your Apex, Lightning Web Components (LWC), and Visualforce code to detect potential issues, enforce coding standards, and improve code quality. By using it with your development workflow, you can catch problems early and ensure consistent code quality across your team.
 
-It’s also a requirement for developing apps for the AppExchange. This guide will walk you through setting up and using Salesforce Code Analyzer both locally in Visual Studio Code (VS Code) and integrating it into your GitHub workflow for automated analysis.
+It’s also a requirement for [developing apps for the AppExchange](https://duelfersolutions.com/salesforce/agentforce/ai/2025/04/30/lessons-learned-road-to-appExchange.html), which is how I was first introduced to this tool. This guide will walk you through setting up and using Salesforce Code Analyzer both locally in Visual Studio Code (VS Code) and integrating it into your GitHub workflow for automated analysis.
 ### **Prerequisites**
 Before getting started, ensure you have the following:
 - An SFDX project opened in VS Code
