@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Salesforce Code Analyzer: From Local Checks to GitHub Automation"
-date:   2025-05-01 07:00:00 -0400
+date:   2025-05-07 04:00:00 -0400
 categories: salesforce cli sf code analyzer github actions
 author: Tamara Chance
 comments: true
