@@ -6,7 +6,7 @@ date:   2025-05-14 07:00:00 -0400
 categories: salesforce apex test businesshours
 author: Tamara Chance
 comments: true
-image:
+image: assets/img/stockImages/clock-calendar.svg
 ---
 Salesforce gives us a lot to be thankful for when it comes to working with time-based logic—and the BusinessHours class is one of those hidden gems. It’s built right into the platform, ready to help you calculate business time across all kinds of use cases: SLA tracking, escalation logic, aging calculations, and more. No need to reinvent the wheel.
 
