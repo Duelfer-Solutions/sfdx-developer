@@ -22,7 +22,7 @@ The interface is intuitive:
 2. Choose the component you want to generate tests for
 3. Click "Generate", and it will add tests to your existing test file, or create a brand new test file for you. 
 
-This comes in handy when you don’t want to take the time to create a test folder and set up the test file, or if you're new to writing tests and you don't know how to set up the file. Most of this will be done for you. 
+The ability to generate a test file from scratch comes in handy when you don’t want to take the time to create a test folder and set up the test file, or if you're new to writing tests and you don't know how to set up the file. Most of this will be done for you. 
 
 Once it’s done generating, you can take a look at the difference between the two files (in this case there was no existing test file, so there’s nothing on the lefthand side). You can choose to _accept_, _discard_, or _regenerate_ the test file.
 
@@ -32,9 +32,9 @@ The test file is set up well at first glance. We have a new \__tests__ folder in
 
 Right off the bat, though, when you run the test, you can see there’s some issues. We don’t have a component called `counter` - it should be `caseBusinessAgeConfigurationPage`. Additionally, the tests themselves don't actually have anything to do with our component. 
 
-Regenerating doesn’t help either, it just adds another test and doesn’t resolve the issue. 
-
 ![First Test After Running](/assets/img/posts/agentforce-test-generator/first-test-after-run.png)
+
+Regenerating doesn’t help either, it just adds another test and doesn’t resolve the issue. 
 
 ### **Making Some Tweaks and Trying Again**
 
@@ -72,7 +72,7 @@ Now that I had a passing test (that hopefully gives the Dev Assistant some hints
 
 ![Final Test Generation Attempt](/assets/img/posts/agentforce-test-generator/final-test-gen-attempt.png)
 
-Unfortunately, this test is meaningless. There are no "default values" aside from the custom settings themselves, so this test fails to check anything that actually related to our component. 
+Unfortunately, this test is meaningless. There are no "default values" aside from the custom settings themselves, so this test fails to check anything actually related to our component. 
 
 Note: after writing this article, I learned from the [Salesforce documentation](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/einstein-lwctestcasegen.html){:target="_blank"} that the correct way to provide an "outline" for a test is to include "TODO" in your test description. Unfortunately, I tested this out a bit myself and couldn't figure out how to make it work either.
 
