@@ -1,17 +1,17 @@
 ---
 layout: post
-title:  "Using AgentForce to Learn LWC Testing: A Mixed Experience"
+title:  "Using Agentforce to Learn LWC Testing: A Mixed Experience"
 date:   2025-05-12 04:00:00 -0400
 categories: salesforce agentforce test generator dev assistant
 author: Caitlin Sullivan
 comments: true
 image: /assets/img/stockImages/code-editor.png
 ---
-As a newer developer with absolutely no experience writing Jest tests for lightning web components, I was excited to try out AgentForce for Developers to get jump-started with writing tests for my most recent LWC. While I didn’t expect it to be fool-proof, the tool seemed like it could be really useful in simplifying some of the more tedious parts of test writing.
+As a newer developer with absolutely no experience writing Jest tests for lightning web components, I was excited to try out Agentforce for Developers to get jump-started with writing tests for my most recent LWC. While I didn’t expect it to be fool-proof, the tool seemed like it could be really useful in simplifying some of the more tedious parts of test writing.
 
-### **Getting Started with AgentForce for Developers**
+### **Getting Started with Agentforce for Developers**
 
-To get started, I made sure I had the [AgentForce for Developers](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-einstein-gpt){:target="_blank"} extension installed in VS Code. Once installed, an AgentForce icon appears on the lefthand side activity bar. When you open it, you’ll see the Dev Assistant. There’s a few ways you can interact with this extension, but my goal was to try out the test generation.
+To get started, I made sure I had the [Agentforce for Developers](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-einstein-gpt){:target="_blank"} extension installed in VS Code. Once installed, an Agentforce icon appears on the lefthand side activity bar. When you open it, you’ll see the Dev Assistant. There’s a few ways you can interact with this extension, but my goal was to try out the test generation.
 
 ![Launching the Dev Assistant](/assets/img/posts/agentforce-test-generator/launch-dev-assistant.png)
 
@@ -90,7 +90,7 @@ This test is written correctly and passes! The Dev Assistant also generated a co
 
 ### **Final Takeaways**
 
-In conclusion, I think AgentForce Dev Assistant can be a really helpful tool for the following parts of testing:
+In conclusion, I think Agentforce Dev Assistant can be a really helpful tool for the following parts of testing:
 - Generating a test file from scratch so that you have something to start with
 - Writing "inverse" tests after you have already tested one side of a condition
 - Generating mock data files (you just have to specifically ask the chatbot to do it for you)
@@ -104,5 +104,5 @@ It was _not_ helpful with the following parts of testing:
 Since I was approaching this project as a beginner and the Dev Assistant wasn't able to help me through some of the more technical parts of writing tests, I had to do some other research to piece together my Jest tests. The following two resources were super helpful and I think any beginner could learn a lot starting here:
 - [Lightning Web Component Tests](https://trailhead.salesforce.com/content/learn/modules/test-lightning-web-components){:target="_blank"} - this module on trailhead has all you need to get started with understanding Jest tests for LWCs, with a couple of basic examples.
 - [Lightning Web Components Recipes](https://github.com/trailheadapps/lwc-recipes){:target="_blank"} - this repository has loads of LWC examples, and many of them have test files included as well. This is a great place to search for a wire adapater or any other built-in function that you want to test ([`getRecord`](https://developer.salesforce.com/docs/platform/lwc/guide/reference-wire-adapters-record.html){:target="_blank"}, for example) and follow how the test is generally set up.
-- [AgentForce for Developers Extension Documentation](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/einstein-overview.html){:target="_blank"}
+- [Agentforce for Developers Extension Documentation](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/einstein-overview.html){:target="_blank"}
 - [Javascript Unit Testing with Jest](https://sfdxdeveloper.com/sfdx/lwc/2019/09/26/javascript-unit-testing-with-jest.html){:target="_blank"}
