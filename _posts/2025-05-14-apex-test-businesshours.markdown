@@ -12,11 +12,11 @@ Salesforce gives us a lot to be thankful for when it comes to working with time-
 
 The BusinessHours class includes a few key static methods:
 
-- `BusinessHours.add(businessHoursId, startDate, intervalMilliseconds)`
-- `BusinessHours.addGmt(businessHoursId, startDate, intervalMilliseconds)`
-- `BusinessHours.diff(businessHoursId, startDate, endDate)`
-- `BusinessHours.isWithin(businessHoursId, targetDate)`
-- `BusinessHours.nextStartDate(businessHoursId, targetDate)`
+- [`BusinessHours.add(businessHoursId, startDate, intervalMilliseconds)`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_add)
+- [`BusinessHours.addGmt(businessHoursId, startDate, intervalMilliseconds)`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_addGmt)
+- [`BusinessHours.diff(businessHoursId, startDate, endDate)`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_diff)
+- [`BusinessHours.isWithin(businessHoursId, targetDate)`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_isWithin)
+- [`BusinessHours.nextStartDate(businessHoursId, targetDate)`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_nextStartDate)
 
 Each one handles the heavy lifting of Salesforce’s Business Hours configuration for you—including time zone alignment, holidays, and working hours. 
 
