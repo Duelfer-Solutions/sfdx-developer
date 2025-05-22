@@ -1,25 +1,25 @@
 ---
 layout: post
 title:  "Working with BusinessHours in Salesforce Flows"
-date:   2025-05-20 07:00:00 -0400
+date:   2025-05-22 07:00:00 -0400
 categories: salesforce flow businesshours
 author: Tamara Chance
 comments: true
-image: 
+image: assets/img/stockImages/laptop-frame-with-flow-image.svg
 ---
-### **"Using a Flow, I need to create a Task with a Due Date that's in 1 _business_ day."**
+### "Using a Flow, I need to create a Task with a Due Date that's in 3 _business_ days."
 
 Calculations around Business Hours in Salesforce are a common ask. And if you’ve ever tried to solve it in Flow, you’ve probably run into a frustrating wall.
 
 At first glance, it seems simple:
 
-Just set the Due Date to TODAY() + 1, right?
+Just set the Due Date to TODAY() + 3, right?
 
 🚫 Not quite.
 
 That method ignores your org’s business hours. It doesn’t account for weekends. It definitely doesn’t respect holidays. And if your users are relying on accurate due dates for SLAs or follow-ups, those gaps matter.
 
-In this post, I'll walk you through [how to set up an Apex action within a Flow](#use-an-invocable-apex-action) to provide accurate Business Time and give you a [Real Example: Create a Task Due in 1 Business Day](#real-example-create-a-task-due-in-1-business-day).
+In this post, I'll walk you through [how to set up an Apex action within a Flow](#how-to-use-it-in-flow-a-real-world-example) to provide accurate Business Time using a real example use case.
 ### The Problem With Flows and Business Time
 Salesforce Flow gives you some standard Date and DateTime functions like TODAY(), NOW(), and WEEKDAY(), and you can use those to fake some business-day logic.
 
@@ -38,10 +38,11 @@ Thankfully, Salesforce does provide a way to do all this correctly—the Busines
 
 It includes methods like:
 
-- BusinessHours.add() – adds business time to a datetime
-- BusinessHours.diff() – calculates business hours between two datetimes
-- BusinessHours.isWithin() – checks if a datetime is during business hours
-- BusinessHours.nextStartDate() – finds the next available business time slot
+- [`BusinessHours.add()`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_add)
+- [`BusinessHours.addGmt()`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_addGmt)
+- [`BusinessHours.diff()`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_diff)
+- [`BusinessHours.isWithin()`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_isWithin)
+- [`BusinessHours.nextStartDate()`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_nextStartDate)
 
 It’s incredibly powerful—but it’s not available in Flow. 😞
 ### Use an Invocable Apex Action
@@ -93,25 +94,38 @@ public static List<Output> runCalculations(List<Input> inputList) {
 }
 ```
 
-### How to Use It in Flow
-Let’s walk through the Flow side of this setup.
+### How to Use It in Flow: A Real World Example
+You want a Flow that when triggered (in this example by a Case creation) assigns a follow-up Task that's due in 3 business days.
 
-#### Step 1: Add the Action
+Let’s walk through the Flow side of this setup. The first thing I did was to setup a Record-Triggered Flow, which I'll assume you already know how to do. 
+
+#### Step 1: Retrieve your Business Hours
+Once you've set up your entry criteria, getting your Business Hours into the flow is easy enough. `BusinessHours` records are accessible from the standard **Get Records** element in Flow. Here, I'm selecting the default Business Hours, which I've configured to be a typical Mon-Fri 9am-5pm workweek. Not shown below, I've also included Memorial Day as a Holiday.
+
+![Screenshot of Get Records configuration](/assets/img/posts/businesshours-in-flows/get-records-setup.png)
+![Screenshot of BusinessHours configuration page](/assets/img/posts/businesshours-in-flows/default-business-hours.png)
+ 
+#### Step 2: Add the Action
 In your Flow:
 
 - Choose the Action element.
-- Search for your custom Apex action—(the name depends on how you label it in the Apex).
+- Search for your custom Apex action—(the name depends on how you labeled it in the Apex).
 
-#### Step 2: Provide the Inputs
-You’ll need to pass in a few values:
+![Screenshot of Apex Action](/assets/img/posts/businesshours-in-flows/select-apex-action.png)
 
-- Business Hours Id – Use a Get Records to fetch the correct one. Most orgs will have one default.
-- Start Date
-- End Date
-- Interval - (i.e. A 24 hour business day = 86400000 ms)
-- Target Date – Optional, used for `isWithin()` and `nextStartDate()`.
+#### Step 3: Provide the Inputs
+Next, you’ll need to configure the Apex Action element and pass in a few values:
 
-<!-- <insert image here> -->
+- Business Hours Id – Use the BusinessHours record retrieved in your Get Record element.
+- Start Date - Since this is a record triggered flow, I'm using the current datetime of the running flow.
+- End Date - Optional, used for `diff()` method. _Not applicable in this example._
+- Interval - The increment of time _in milliseconds_ (For example, one 8 hour business day is 28800000 ms and 3 8hr business days or 24 hrs is 86400000 ms.)
+- Target Date – Optional, used for `isWithin()` and `nextStartDate()`. _Not applicable in this example._
+
+![Screenshot of Apex Action Configuration](/assets/img/posts/businesshours-in-flows/apex-action-inputs.png)
+
+In this example, because I'm specifically looking for the `add()` calculation, I'm only providing (3) arguments to the apex action: **BusinessHours Id**, **startDate**, and **intervalMilliseconds**.
+I'm using a constant variable to hold my inveral value in milliseconds because I prefer not to hardcode the value within an element. If I need to update this later, it's much easier to find the constant variable and update it there. But this value could also be held in a Custom Settings object, if that's your preference.
 
 #### Step 3: Use the Outputs
 The Apex Action returns a bunch of useful values:
@@ -122,29 +136,19 @@ The Apex Action returns a bunch of useful values:
 - isWithinBusinessHours – True/false for whether targetDate is inside business hours
 - nextBusinessStartDate – The next available business datetime from targetDate
 
-You can use any of these downstream in your Flow.
+You can use any of these downstream in your Flow!
 
-<!-- <insert image here> -->
+![Screenshot of Apex Action Configuration](/assets/img/posts/businesshours-in-flows/apex-action-outputs.png)
 
-### Real Example: Create a Task Due in 1 Business Day
-Let’s put it all together:
+Here, I'm storing the `addedDate` output in a variable called `dueDate` that will be passed into the **New Task** element as the `ActivityDate`.
+#### Result
+The Task’s due date is exactly 3 (8hr) business days after creation—accounting for holidays, weekends, and your org’s official hours. 
 
-- You want a Flow that when triggered (in this case by a Case creation) assigns a follow-up Task that's due in 1 business day.
+![Results in Debug Log](/assets/img/posts/businesshours-in-flows/results.png)
 
-Steps:
-
-- Get the Business Hours record (I'm using the default).
-- Use a Constant or Assignment to define the interval:
-86400000 (1 day in milliseconds)
-- Call the Business Hours Apex Action.
-- Use the addedDate output to set the Task Due Date.
-
-<!-- <insert image here> -->
-
-Result: the Task’s due date is exactly 1 (8hr) business day after creation—accounting for holidays, weekends, and your org’s official hours.
+Note that I'm showing you the results in the debug log so that you can see both the _startDate_ and the output assigned to _dueDate_ side-by-side. Notice how it skipped the Friday, Saturday, Sunday, and Memorial Day.
 
 No formula hacks. No guessing. Just accurate business logic.
-
 ### Bonus: What Else You Can Do With This
 Here are a few more ideas for using this Apex Action:
 
@@ -156,7 +160,7 @@ Here are a few more ideas for using this Apex Action:
 ### Testing Note
 I’ve written a separate post all about how to test BusinessHours logic in Apex, which in my opinion is where things get a lot more complex. You can find that here:
 
-👉 [Testing BusinessHours in Apex](./2025-05-14-apex-test-businesshours.html)
+👉 [Testing BusinessHours in Apex]({% post_url 2025-05-14-apex-test-businesshours %})
 
 ### Wrapping Up
 Flows are powerful, but when it comes to anything date-related that requires business time, you need a little Apex assist. This invocable method bridges the gap between the declarative and programmatic worlds, so you can build smart, accurate automations.
