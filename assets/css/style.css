@@ -363,11 +363,13 @@ table {
     .post-content h1 {
       font-size: 42px; } }
 
+.post-subtitle,
 .post-content {
   margin-bottom: 40px; }
   .post-content h2 {
     font-size: 28px; }
     @media screen and (min-width: 900px) {
+      .post-subtitle,
       .post-content h2 {
         font-size: 32px; } }
   .post-content h3 {
