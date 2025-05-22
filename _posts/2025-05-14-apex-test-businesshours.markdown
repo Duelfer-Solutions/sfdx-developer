@@ -39,10 +39,10 @@ You even start wondering if the moon phase is affecting your assertions. Your co
 
 🙈 _Spoiler alert:_ The problem wasn’t with stubbing. You just can’t stub a static method.
 
-**But you can stub your own service class method—the one that wraps the static call.**
+**But you can stub an instance of your own service class method—one that wraps the BusinessHours static method call.**
 
-That’s the twist. That’s the way forward. You just need to control _your own abstraction._
 ### _Stub Your Own Service Method, Not Salesforce's_
+That’s the twist. That’s the way forward. You just need to _wrap_ the static method in a custom class.
 The turning point is this: stop trying to test Salesforce’s static logic. Start testing your own.
 #### **Step 1: Create a service class wrapper**
 Instead of calling BusinessHours.diff() directly in your core logic, wrap it in a simple service class like this:
