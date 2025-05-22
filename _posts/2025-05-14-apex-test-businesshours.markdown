@@ -91,4 +91,4 @@ No more trying to fake BusinessHours records. No more relying on _real data_ in 
 - ✅ You return predictable values
 - ✅ You stop testing Salesforce internals
 
-You _can_ actually test BusinessHours logic--without pain. For more tips & tricks check out some of our [other articles]({{ site.url }}). Happy Coding!
+You _can_ actually test your BusinessHours dependent logic--without pain. For more tips & tricks check out some of our [other articles]({{ site.url }}). Happy Coding!
