@@ -41,8 +41,8 @@ You even start wondering if the moon phase is affecting your assertions. Your co
 
 **But you can stub an instance of your own service class method—one that wraps the BusinessHours static method call.**
 
-### _Stub Your Own Service Method, Not Salesforce's_
 That’s the twist. That’s the way forward. You just need to _wrap_ the static method in a custom class.
+### _Stub Your Own Service Class, Not Salesforce's_
 The turning point is this: stop trying to test Salesforce’s static logic. Start testing your own.
 #### **Step 1: Create a service class wrapper**
 Instead of calling BusinessHours.diff() directly in your core logic, wrap it in a simple service class like this:
