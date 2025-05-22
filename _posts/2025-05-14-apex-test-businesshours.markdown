@@ -65,12 +65,45 @@ That’s the twist. That’s the way forward. You just need to _wrap_ the static
 ### _Stub Your Own Service Class, Not Salesforce's_
 The turning point is this: stop trying to test Salesforce’s static logic. Start testing your own.
 #### **Step 1: Create a service class wrapper**
-Instead of calling BusinessHours.diff() directly in your core logic, wrap it in a simple service class like this:
+Create a simple service class wrapper that will call the BusinessHours static method like this:
+
 ```apex
 public class BusinessHoursService {
-
     public Long diff(Id businessHoursId, Datetime startDate, Datetime endDate) {
         return BusinessHours.diff(businessHoursId, startDate, endDate);
+    }
+}
+```
+
+Then, instead of calling BusinessHours.diff() directly in your core logic like this:
+
+```apex
+public class MyHelperClass {
+    public static void doSomethingOverThreshold(Case c) {
+        Integer threshold = 86400000; //24hrs
+        Long caseAge = BusinessHours.diff('0000000000000', c.CreatedDate, Datetime.now());
+        if (caseAge > threshold) {
+            // do something
+        }
+    }
+}
+```
+...wrap it in an instantiation of your service class like this:
+
+```apex
+public class MyHelperClass {
+    BusinessHoursService bhService;
+
+    public MyHelperClass(BusinessHoursService bhService) {
+        this.bhService = bhService;
+    }
+
+    public static void doSomethingOverThreshold(Case c) {
+        Integer threshold = 86400000; //24hrs
+        Long caseAge = bhService.diff('0000000000000', c.CreatedDate, Datetime.now());
+        if (caseAge > threshold) {
+            // do something
+        }
     }
 }
 ```
@@ -85,7 +118,6 @@ As the [Apex documentation](https://developer.salesforce.com/docs/atlas.en-us.25
 
 ```apex
 public class BusinessHoursServiceStub implements System.StubProvider {
-
     public Object handleMethodCall(Object stubbedObject, String stubbedMethodName, System.Type returnType, 
         List<System.Type> listOfParamTypes, List<String> listOfParamNames, List<Object> listOfArgs) {
         if (returnType.getName() == 'Long') {
@@ -100,10 +132,14 @@ In this case, we want to return a constant, predictable value so we can isolate 
 #### **Step 3: Stub the service in your test**
 Now in your test class you can call your stub.
 ```apex
+Case c = new Case(Subject = 'Test');
 BusinessHoursService stub = (BusinessHoursService) Test.createStub(
     BusinessHoursService.class,
     new BusinessHoursServiceStub()
 );
+MyHelperClass mhc = new MyHelperClass(stub);
+mhc.doSomethingOverThreshold(c);
+System.assert(true, 'Verify any threshold side-effects occur.');
 ```
 No more trying to fake BusinessHours records. No more relying on _real data_ in tests. No more brittle tests held together with duct tape and hope.
 
