@@ -31,7 +31,27 @@ Suddenly, that simple, beautiful method becomes a black box. You search the [Sal
 
 Nothing. No section on testing. No warning that you can’t create custom Business Hours records in tests.
 
-You try injecting fake business hours. _"Nope. You can’t insert those records in a test context."_ Salesforce blocks it.
+You try injecting fake business hours, since BusinessHours technically supports the `create()` call. 
+```
+BusinessHours bh = new BusinessHours();
+bh.Name = 'Weekday Business Hours';
+bh.IsActive = true;
+bh.IsDefault = false;
+bh.TimeZoneSidKey = 'America/New_York';
+bh.MondayStartTime    = Time.newInstance(9, 0, 0, 0);
+bh.MondayEndTime      = Time.newInstance(17, 0, 0, 0);
+bh.TuesdayStartTime   = Time.newInstance(9, 0, 0, 0);
+bh.TuesdayEndTime     = Time.newInstance(17, 0, 0, 0);
+bh.WednesdayStartTime = Time.newInstance(9, 0, 0, 0);
+bh.WednesdayEndTime   = Time.newInstance(17, 0, 0, 0);
+bh.ThursdayStartTime  = Time.newInstance(9, 0, 0, 0);
+bh.ThursdayEndTime    = Time.newInstance(17, 0, 0, 0);
+bh.FridayStartTime    = Time.newInstance(9, 0, 0, 0);
+bh.FridayEndTime      = Time.newInstance(17, 0, 0, 0);
+
+insert bh;
+```
+_"Nope. You can’t insert those records in a test context."_ Totally useless. Salesforce blocks it.
 
 You scour forums. Trailblazer posts hint at answers, but most are incomplete. You try stubbing the `BusinessHours.diff()` method. _But_, all of the BusinessHours methods are **static methods**—and static methods in Apex **can’t be stubbed**.
 
