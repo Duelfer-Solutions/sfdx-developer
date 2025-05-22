@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Using Agentforce to Learn LWC Testing: A Mixed Experience"
-date:   2025-05-12 04:00:00 -0400
+date:   2025-05-22 03:30:00 -0400
 categories: salesforce agentforce test generator dev assistant
 author: Caitlin Sullivan
 comments: true
