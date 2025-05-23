@@ -2,7 +2,7 @@
 layout: post
 title:  "Testing BusinessHours in Apex"
 subtitle: "The Painless Way Salesforce Forgot to Tell You"
-date:   2025-05-14 07:00:00 -0400
+date:   2025-05-23 11:00:00 -0400
 categories: salesforce apex test businesshours
 author: Tamara Chance
 comments: true
