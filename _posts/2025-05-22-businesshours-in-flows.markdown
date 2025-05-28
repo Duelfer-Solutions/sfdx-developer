@@ -38,11 +38,11 @@ Thankfully, Salesforce does provide a way to do all this correctly—the Busines
 
 It includes methods like:
 
-- [`BusinessHours.add()`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_add)
-- [`BusinessHours.addGmt()`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_addGmt)
-- [`BusinessHours.diff()`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_diff)
-- [`BusinessHours.isWithin()`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_isWithin)
-- [`BusinessHours.nextStartDate()`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_nextStartDate)
+- [`BusinessHours.add(businessHoursId, startDate, intervalMilliseconds)`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_add)
+- [`BusinessHours.addGmt(businessHoursId, startDate, intervalMilliseconds)`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_addGmt)
+- [`BusinessHours.diff(businessHoursId, startDate, endDate)`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_diff)
+- [`BusinessHours.isWithin(businessHoursId, targetDate)`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_isWithin)
+- [`BusinessHours.nextStartDate(businessHoursId, targetDate)`](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_businesshours.htm#apex_System_BusinessHours_nextStartDate)
 
 It’s incredibly powerful—but it’s not available in Flow. 😞
 ### Use an Invocable Apex Action
