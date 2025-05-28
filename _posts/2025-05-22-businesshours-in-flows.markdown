@@ -64,9 +64,10 @@ Here’s what the Invocable Action supports:
 | `isWithin()` | Returns true if a datetime is within business hours |
 | `nextStartDate()` | Finds the next datetime that falls inside business hours |
 
-It runs all five of these calculations and returns all results in a single Flow-friendly output.
+It runs all five of these calculations and returns all results in a single Admin-friendly flow output.
 
-Below is just a snippet of the code. You can view the whole class in this [gist](https://gist.github.com/tamarachance/d81f1272ac1ba185e80c81108c90a783).
+Below is just a snippet of the code so you can see how the flow inputs affect which values are returned. You can view the whole class in this [gist](https://gist.github.com/tamarachance/d81f1272ac1ba185e80c81108c90a783). Only one invocable method can be included in a single Apex Class, so for simplicity and ease of use I included all of the business time logic in a single class. 
+
 
 ```apex
 @InvocableMethod(label='Run Business Hours Calculations')
