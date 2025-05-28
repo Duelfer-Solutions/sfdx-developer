@@ -29,8 +29,8 @@ For example, you might write something like:
 That helps with weekends. But what about a Monday holiday? What if business hours start at 9am and your Flow runs at 7am—should the task still be due the next morning?
 
 Salesforce Flow just isn’t built for that level of time awareness.
-### The Class That _Can_ Handle It
-Thankfully, Salesforce does provide a way to do all this correctly—the BusinessHours Class. It understands:
+### The Apex Class That _Can_ Handle It
+Thankfully, Salesforce does provide a way to do all this correctly—the BusinessHours Apex Class. It understands:
 
 - Your org’s business hours
 - Your active holiday calendar
