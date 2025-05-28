@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Working with BusinessHours in Salesforce Flows"
-date:   2025-05-22 07:00:00 -0400
+date:   2025-05-28 07:00:00 -0400
 categories: salesforce flow businesshours
 author: Tamara Chance
 comments: true
@@ -162,7 +162,7 @@ Here are a few more ideas for using this Apex Action:
 ### Testing Note
 I’ve written a separate post all about how to test BusinessHours logic in Apex, which in my opinion is where things get a lot more complex. You can find that here:
 
-👉 [Testing BusinessHours in Apex]({% post_url 2025-05-14-apex-test-businesshours %})
+👉 [Testing BusinessHours in Apex]({% post_url 2025-05-23-apex-test-businesshours %})
 
 ### Wrapping Up
 Flows are powerful, but when it comes to anything date-related that requires business time, you need a little Apex assist. This invocable method bridges the gap between the declarative and programmatic worlds, so you can build smart, accurate automations.
