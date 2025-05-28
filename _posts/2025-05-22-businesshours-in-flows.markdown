@@ -68,6 +68,7 @@ It runs all five of these calculations and returns all results in a single Admin
 
 Below is just a snippet of the code so you can see how the flow inputs affect which values are returned. You can view the whole class in this [gist](https://gist.github.com/tamarachance/d81f1272ac1ba185e80c81108c90a783). Only one invocable method can be included in a single Apex Class, so for simplicity and ease of use I included all of the business time logic in a single class. 
 
+The only required input is the _Business Hours Id_ since it is used in all of the [BusinessHours](#the-apex-class-that-can-handle-it) methods. The rest of the inputs are optional and based on whatever calculation you need returned. 
 
 ```apex
 @InvocableMethod(label='Run Business Hours Calculations')
