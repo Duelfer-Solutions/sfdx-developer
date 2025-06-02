@@ -147,4 +147,4 @@ No more trying to fake BusinessHours records. No more relying on _real data_ in 
 - ✅ You return predictable values
 - ✅ You stop testing Salesforce internals
 
-You _can_ actually test BusinessHours logic--without pain. Learn how to use [BusinessHours in Flows]({% post_url 2025-05-28-businesshours-in-flows %}) or check out some of our [other articles]({{ site.url }}) for other tips & tricks. Happy Coding!
+You _can_ actually test BusinessHours logic--without pain. Learn how to use [BusinessHours in Flows]({% post_url 2025-06-02-businesshours-in-flows %}) or check out some of our [other articles]({{ site.url }}) for other tips & tricks. Happy Coding!

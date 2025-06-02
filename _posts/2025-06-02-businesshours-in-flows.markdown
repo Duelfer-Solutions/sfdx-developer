@@ -1,11 +1,11 @@
 ---
 layout: post
 title:  "Working with BusinessHours in Salesforce Flows"
-date:   2025-05-28 07:00:00 -0400
+date:   2025-06-02 05:00:00 -0400
 categories: salesforce flow businesshours
 author: Tamara Chance
 comments: true
-image: assets/img/stockImages/laptop-frame-with-flow-image.svg
+image: assets/img/stockImages/laptop-frame-with-flow-image.png
 ---
 ### "Using a Flow, I need to create a Task with a Due Date that's in 3 _business_ days."
 
