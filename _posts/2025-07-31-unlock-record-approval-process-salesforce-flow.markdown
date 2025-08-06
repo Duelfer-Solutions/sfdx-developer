@@ -56,23 +56,26 @@ Imagine this use case:
 
 > When a Case enters the Approval Process, you want Sales Ops to still be able to update the Priority field.
 
-We'll assume here that you've already done some backend setup, including:
- - adding a flag field (Is_Locked__c) or something similar on the Case object, and
- - creating an approval process that updates this field after the initial submission.
+For the purpose of this example, we'll assume you already have an approval process set up. Since there's no way to know when a record has entered into an approval process, we'll first need to do some backend setup before working on our flow. This includes:
+
+ - adding a system field (Is_Locked__c or something similar) on the Case object, and
+ - adding an `Field Update` action to the approval process to update the system field after the initial submission.
 
 ![Initial Submission Actions in Approval Process](/assets/img/posts/unlock-record-approval-process-salesforce-flow/initial-submission.png)
 
-This is necessary so that your record-triggered flow knows when a Case has been submitted into the approval process. So now, let's pick up from there.
+Adding a system field (or flag field as it is sometimes called) provides a way for us to communicate to the platform when a record has entered into an approval process. It doesn't need to be on the page layout or visible to any end users, as it is only being used to trigger our flow.
+
+Now, we can begin working on our flow.
 
 **Step 1: Create a Record-Triggered Flow**
 
 - Object: Case
 - Trigger: When a record is updated
-- Entry Conditions: [Is Locked] Equals true
+- Entry Conditions: [Is Locked/System Flag Field] Equals true
 - Run the flow **only when a record is updated to meet the condition requirements**.
 - Toggle Add Asynchronous Path to true.
 
-The Initial Submission Step happens before the Record is officially locked. So it's important that the flow runs as a future asynchronous path to unlock the record. 
+The Initial Submission Step happens before the Record is officially locked. So it's important that the flow runs as a future asynchronous path in order to unlock the record. 
 
 **Step 2: Add the Flow Elements including the Lock/Unlock Record Action**
 
@@ -92,16 +95,16 @@ The Initial Submission Step happens before the Record is officially locked. So i
 
 And that’s it! No Apex. No AppExchange. Just one simple Flow.
 
-The Case record is updated right after initial submission. That update triggers your flow to run and unlock the record for editing.
+The Case record is updated right after initial submission. That update triggers your flow to run and unlock the record for editing. The entire automation happens in the background with no additional required actions from any end users.
 
 #### Why This Changes Everything
-Admins no longer have to wait on a developer to support this common use case. Now, anyone comfortable with Flows can:
+Simple use cases like this one no longer require apex. Now, anyone comfortable with Flows can:
 
 - Lock a record to prevent edits.
 - Unlock a record for specific users.
-- Handle everything natively inside Salesforce with no code.
+- Control the approval process without developer intervention.
 
-This keeps your data protected and your team productive. Use this feature to keep your team moving forward, even while records are under review. Use this feature to reduce technical debt and remove the old apex method.
+This keeps your data protected and your team productive. Use this feature to keep your team moving forward, even while records are under review. Build this in flows so you can collaborate with admins and power users.
 
 With the Summer ‘24 release, Salesforce finally gave admins the tools to control record locks without Apex. The new Lock Record Flow Action makes it easy to unlock a record in the Salesforce Approval Process—and decide exactly who can edit it. 
 
