@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How to Unlock a Record in a Salesforce Approval Process Using Flow"
-date:   2025-07-31 05:00:00 -0400
+date:   2025-08-07 05:00:00 -0400
 categories: flows approval-process
 author: Tamara Chance
 comments: true
