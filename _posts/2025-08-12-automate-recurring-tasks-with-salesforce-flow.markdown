@@ -5,7 +5,7 @@ date:   2025-08-12 05:00:00 -0400
 categories: flows
 author: Tamara Chance
 comments: true
-image: 
+image: assets/img/stockImages/task-checklist.png
 ---
 When I first tried to create a recurring task in Salesforce using Flow, I hit a wall.
 
