@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Automate Recurring Tasks with Salesforce Flow"
-date:   2025-08-07 05:00:00 -0400
+date:   2025-08-12 05:00:00 -0400
 categories: flows
 author: Tamara Chance
 comments: true
