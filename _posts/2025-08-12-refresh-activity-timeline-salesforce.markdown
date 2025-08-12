@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Why You Can’t Refresh the Salesforce Activity Timeline Programmatically"
-date:   2025-08-11 05:00:00 -0400
+date:   2025-08-12 05:00:00 -0400
 categories: activity timeline
 author: Tamara Chance
 comments: true
@@ -37,10 +37,28 @@ Here’s a quick rundown of all the usual suspects, and why none of them get the
 ## So What Does Work?
 Honestly? While it may be painful for the user from a UX perspective, the best way to maintain data integrity is to force a full page refresh in your custom component. Or continue manually refreshing the page.
 
-If there are some other custom features that you know you _need_ inside the Activity Timeline anyway, then maybe you could consider rebuilding the Activity Timeline yourself as a custom Lightning Web Component.
+Here's an example to refresh programmatically:
+```
+import { LightningElement, wire } from 'lwc';
+import { NavigationMixin, CurrentPageReference } from 'lightning/navigation';
 
-But that’s a big lift and a project in itself.
+export default class ExampleComponent extends NavigationMixin(LightningElement) {
 
+    @wire(CurrentPageReference)
+    _pageRef;
+
+    handleSave() {
+        // TODO: execute your code
+        // then, if successful...
+        this.refreshPage();
+    }
+
+    // Full page refresh to force the activity timeline to reload new data
+    refreshPage() {
+        this[NavigationMixin.Navigate](this._pageRef);
+    }
+}
+```
 ## Is There Any Hope?
 Yes. Salesforce has an [IdeaExchange request](https://ideas.salesforce.com/s/idea/a0B8W00000GdnHYUAZ/refresh-the-timeline-activity-from-the-lightning-component) that’s currently marked “In Development.”
 
