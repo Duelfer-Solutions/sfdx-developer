@@ -36,7 +36,7 @@ We’re going to walk through how to:
 
 You’ll have a record-triggered flow that creates a task—and that task will repeat based on when the user completes the original task.
 
-<!-- <image placeholder – screenshot of the flow or finished Create Records element> -->
+![Create Recurring Task Flow](/assets/img/posts/recurring-tasks-record-triggered-flow/create-recurring-tasks-flow.png)
 
 **Step 1: Understand the Fields You Need**
 
@@ -46,7 +46,6 @@ Here are the key fields you’ll need to know:
 
 | **Field Name** | **Field Values** | **What It Does** |
 | :------------: | :--------------: | :--------------: |
-| IsRecurrence | True/False | Tells Salesforce if this is a repeating task |
 | RecurrenceInterval | Number |	The number of _days_ after the task’s due date or completed date when you want the next task to be due. |
 | RecurrenceRegeneratedType | After due date/After date completed/(Task Closed) |	Makes sure the new task is assigned the correct expected due date |
 
@@ -55,8 +54,6 @@ I'll link to the [documentation](https://help.salesforce.com/s/articleView?id=sa
 - After Due Date: Creates recurrences with a due date set to the RecurrenceInterval value plus the previous task's due date.
 - After Date Completed: Creates recurrences with a due date set to the RecurrenceInterval value plus the date the task was completed.
 - (Task Closed): Indicates that the task was closed as part of a repeating series.
-
-<!-- <image placeholder – screenshot showing these fields configured in the flow> -->
 
 **Step 2: Add Your Task Create Records Element**
 
@@ -68,11 +65,10 @@ For this example, we'll use the scenario I mentioned at the start of the post.
 1. Create your record-triggered flow, and add a new Create Records element that creates a Task.
 2. Set your usual Task values (like Subject, WhatId, etc.)
 3. Then include all the recurrence fields listed above:
-    * IsRecurrence = TRUE
     * RecurrenceRegeneratedType = After Due Date
-    * RecurrenceInterval = 30 (This is a required field.)
+    * RecurrenceInterval = 30 (This is a required field when using RecurrenceRegeneratedType, although it is not marked as required on the page layout.)
 
-<!-- <image placeholder – full Create Records config screenshot> -->
+![Recurring Task Field Assignments](/assets/img/posts/recurring-tasks-record-triggered-flow/assign-recurring-task-variables.png)
 
 **Step 3: Test It Out**
 
@@ -83,7 +79,7 @@ For this example, we'll use the scenario I mentioned at the start of the post.
 5. Mark the task as **Completed**, and refresh the Activity Timeline.
 6. You should now see a new Upcoming Task with the same subject line. But check out the due date! It is 30 days from the _original task's__ due date. 
 
-<!-- <image placeholder – screenshot of the Task in the Activity Timeline in the UI> -->
+![First Task Due Date](/assets/img/posts/recurring-tasks-record-triggered-flow/first-task-due-date.png) ![Recurrence Due Date](/assets/img/posts/recurring-tasks-record-triggered-flow/next-recurrence-due-date.png)
 
 🎉 That’s It!
 Now you’ve got:
@@ -96,9 +92,15 @@ Now you’ve got:
 
 Want the recurring task to stop after a while? You'll first need to trigger an automation to run. For instance, when a Case's status is updated to _Closed_ or something along those lines. This should launch another record-triggered flow. 
 
+![Configure Record Trigger FLow Start Conditions](/assets/img/posts/recurring-tasks-record-triggered-flow/start-conditions-config.png)
+
 Set the `Task.RecurrenceRegeneratedType` to `(Task Closed)` _at the same time_ as the `Task.Status` is marked `Completed`. This will stop any future tasks from being created.
 
-<!-- <insert image of stop tasks> -->
+![Configure Update Task Records Filter By & Save To Conditions](/assets/img/posts/recurring-tasks-record-triggered-flow/update-record-config.png)
+
+And viola!
+
+![Stop Recurring Tasks Flow](/assets/img/posts/recurring-tasks-record-triggered-flow/stop-recurring-tasks-flow.png)
 
 If you get stuck or something’s not working, drop a comment or DM me. I’d love to help.
 
