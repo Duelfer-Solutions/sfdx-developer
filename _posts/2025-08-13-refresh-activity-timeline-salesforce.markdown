@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Why You Can’t Refresh the Salesforce Activity Timeline Programmatically"
-date:   2025-08-12 05:00:00 -0400
+date:   2025-08-13 09:00:00 -0400
 categories: activity timeline
 author: Tamara Chance
 comments: true
