@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Why You Can’t Refresh the Salesforce Activity Timeline Programmatically"
-date:   2025-08-04 05:00:00 -0400
+date:   2025-08-13 09:00:00 -0400
 categories: activity timeline
 author: Tamara Chance
 comments: true
@@ -35,24 +35,40 @@ Here’s a quick rundown of all the usual suspects, and why none of them get the
 | Publishing a Platform Event | Send out an event when something changes. | You can listen in custom components, but standard ones like the Activity Timeline don’t care. |
 
 ## So What Does Work?
-Honestly? Only one thing as of right now:
+Honestly? While it may be painful for the user from a UX perspective, the best way to maintain data integrity is to force a full page refresh in your custom component. Or continue manually refreshing the page.
 
-Rebuild the Activity Timeline yourself as a custom Lightning Web Component.
+Here's an example to refresh programmatically:
+```
+import { LightningElement, wire } from 'lwc';
+import { NavigationMixin, CurrentPageReference } from 'lightning/navigation';
 
-It’s a big lift, but at least you’ll have full control over how and when it updates. Developers have done it — you can find open-source versions on GitHub — but it’s a project in itself.
+export default class ExampleComponent extends NavigationMixin(LightningElement) {
 
+    @wire(CurrentPageReference)
+    _pageRef;
+
+    handleSave() {
+        // TODO: execute your code
+        // then, if successful...
+        this.refreshPage();
+    }
+
+    // Full page refresh to force the activity timeline to reload new data
+    refreshPage() {
+        this[NavigationMixin.Navigate](this._pageRef);
+    }
+}
+```
 ## Is There Any Hope?
 Yes. Salesforce has an [IdeaExchange request](https://ideas.salesforce.com/s/idea/a0B8W00000GdnHYUAZ/refresh-the-timeline-activity-from-the-lightning-component) that’s currently marked “In Development.”
 
 That’s promising.
 
-Once it goes GA (Generally Available), we’re hoping for an official API or refresh mechanism to finally make the Activity Timeline react to backend changes — like any other reasonable component.
+Once it becomes GA (Generally Available), we’re hoping for an official API or refresh mechanism to finally make the Activity Timeline react to backend changes — like any other reasonable component.
 
-But until then, your options are:
+But until then, your options are limited.
 
-🚧 Rebuild the Timeline as a custom component, or
-
-⏳ Wait it out and live with the refresh button a little longer.
+Your best bet is to wait it out and live with the refresh button a little longer or programmatically force a page refresh.
 
 ## Final Thoughts
 Salesforce is an amazing platform — but sometimes the standard components don’t quite keep up with modern use cases. If you’re hitting this wall, you’re not alone. Just know that the limitation isn’t with your code — it’s with the platform.
