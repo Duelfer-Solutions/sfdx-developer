@@ -357,6 +357,7 @@ table {
 .post-content h1 {
   font-size: 42px;
   letter-spacing: -1px;
+  padding-top: 10px;
   line-height: 1; }
   @media screen and (min-width: 900px) {
     .post-title,
