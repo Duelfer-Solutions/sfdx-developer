@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Better UX with Dependent Picklists: Required Fields Done Right"
-date:   2025-08-11 05:00:00 -0400
-categories: no-code config
+date:   2025-11-14 04:45:00 -0400
+categories: config picklists
 author: Tamara Chance
 comments: true
 image: assets/img/stockImages/dependent-picklists-required-field.png
