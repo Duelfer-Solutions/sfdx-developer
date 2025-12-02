@@ -60,7 +60,7 @@ I'll link to the [documentation](https://help.salesforce.com/s/articleView?id=sa
 For this example, we'll use the scenario I mentioned at the start of the post. 
 
 > When a Case is created, generate a new Task. The new task should have a due date set to 30 days from today. 
-> Completion of this task should generate a recurring task with the same subject and due date.
+> Completion of this task should generate a recurring task with the same subject and a due date 30 days after the original due date.
 
 1. Create your record-triggered flow, and add a new Create Records element that creates a Task.
 2. Set your usual Task values (like Subject, WhatId, etc.)
@@ -77,7 +77,7 @@ For this example, we'll use the scenario I mentioned at the start of the post.
 3. Now **Activate** your flow.
 4. Trigger your flow to run by creating the right record. You should see the Task in the Activity Timeline. Make a note of the due date.
 5. Mark the task as **Completed**, and refresh the Activity Timeline.
-6. You should now see a new Upcoming Task with the same subject line. But check out the due date! It is 30 days from the _original task's__ due date. 
+6. You should now see a new Upcoming Task with the same subject line. But check out the due date! It is 30 days from the _original task's_ due date. 
 
 ![First Task Due Date](/assets/img/posts/recurring-tasks-record-triggered-flow/first-task-due-date.png) ![Recurrence Due Date](/assets/img/posts/recurring-tasks-record-triggered-flow/next-recurrence-due-date.png)
 
@@ -102,7 +102,7 @@ And viola!
 
 ![Stop Recurring Tasks Flow](/assets/img/posts/recurring-tasks-record-triggered-flow/stop-recurring-tasks-flow.png)
 
-If you get stuck or something’s not working, drop a comment or DM me. I’d love to help.
+If you get stuck or something’s not working, drop a comment below. I’d love to help.
 
 And if you want more Salesforce flow tutorials, check out the following posts:
 - [How to Unlock a Record in a Salesforce Approval Process Using Flow]({% post_url 2025-06-02-businesshours-in-flows %})
